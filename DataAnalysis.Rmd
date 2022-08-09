@@ -1,0 +1,41 @@
+---
+title: "Data Analysis in R program"
+author: "Mohamed Ibrahim Abdilahi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load main library 
+```{r load library, echo=FALSE}
+library(tidyverse)
+```
+
+# Import the data set 
+
+```{r}
+social <- read_csv("data/data_process/clean_social.csv")
+view(social)
+```
+
+We need to split data into separate variable in every observation. We will need to make composite variable to get mean score. 
+
+```{r slipt typesocial, echo=TRUE}
+split <- social %>% 
+  separate(typeSocial, into = c("useFacebok", "useTwitter", "useYoutube",  "uselinkedin", "useTiktok", "useSnapchat", "useInstagram"), sep = ",", extra = "drop", fill = "right")
+```
+
+```{r}
+social <- split %>% 
+  select(gender, useFacebok, useTwitter, useYoutube, uselinkedin, useTiktok, useSnapchat, useInstagram)
+```
+
+
+## Check variable split 
+```{r}
+head(social)
+```
+
